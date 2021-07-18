@@ -1,0 +1,20 @@
+{
+  "name": "simpleioc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "watch": "tsc -w",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "Raymond Wang",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "typescript": "^4.3.5"
+  }
+}
