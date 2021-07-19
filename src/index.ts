@@ -1,2 +1,1 @@
-const msg: string = "Simple IOC library";
-console.log(msg);
+export * from "./simple-ioc/simple-ioc";
