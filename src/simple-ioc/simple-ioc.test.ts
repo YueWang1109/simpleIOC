@@ -61,6 +61,14 @@ describe("Simple IoC tests", () => {
     container = new SimpleIoc();
   });
   describe("register dependencies", () => {
+    it("bind number type", () => {
+      container.bindObject<number>(TYPE.myKey, 123);
+      expect(container.use<number>(TYPE.myKey)).toBe(123);
+    });
+    it("bind array type", () => {
+      container.bindObject<string[]>(TYPE.myKey, ["this", "is", "an", "array"]);
+      expect(container.use<string[]>(TYPE.myKey)).toEqual(["this", "is", "an", "array"]);
+    });
     it("bind objects", () => {
       container.bindObject<ObjType>(TYPE.myKey, {name: "Alex", age: 28});
       expect(container.use<ObjType>(TYPE.myKey)?.name).toEqual("Alex");
@@ -77,6 +85,17 @@ describe("Simple IoC tests", () => {
     });
 
     it("bind class with singleton", () => {
+      container.bindClass<ClassType>(TYPE.myKey, TestClass, true);
+      expect(container.use<ClassType>(TYPE.myKey)?.sayHi()).toEqual("Hello, world! count = 0");
+      expect(container.use<ClassType>(TYPE.myKey)?.sayHi()).toEqual("Hello, world! count = 1");
+      expect(container.use<ClassType>(TYPE.myKey)?.sayHi()).toEqual("Hello, world! count = 2");
+    });
+
+    it("rebind class with singleton", () => {
+      container.bindClass<ClassType>(TYPE.myKey, TestClass, true);
+      expect(container.use<ClassType>(TYPE.myKey)?.sayHi()).toEqual("Hello, world! count = 0");
+      expect(container.use<ClassType>(TYPE.myKey)?.sayHi()).toEqual("Hello, world! count = 1");
+      expect(container.use<ClassType>(TYPE.myKey)?.sayHi()).toEqual("Hello, world! count = 2");
       container.bindClass<ClassType>(TYPE.myKey, TestClass, true);
       expect(container.use<ClassType>(TYPE.myKey)?.sayHi()).toEqual("Hello, world! count = 0");
       expect(container.use<ClassType>(TYPE.myKey)?.sayHi()).toEqual("Hello, world! count = 1");
