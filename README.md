@@ -1,4 +1,4 @@
-# NBCUniversal Coding Challenge -- SimpleIOC Library
+# SimpleIOC Library
 
 Using Typescript to build simple IoC library
 
